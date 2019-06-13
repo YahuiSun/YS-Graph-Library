@@ -35,6 +35,34 @@ void subgraph_add_vertex(subgraph& input_graph, int vertex) {
 
 
 #pragma region
+void subgraph_remove_vertex(subgraph& input_graph, int vertex) {
+
+	int i = 0;
+	while (i < input_graph.size()) {
+		if (input_graph[i].first == vertex) { // i is the list of this vertex
+			input_graph.erase(input_graph.begin() + i); // remove this list
+			i--;
+		}
+		else {
+			/*remove vertex from input_graph[i].second*/
+			int j = 0;
+			while (j < input_graph[i].second.size()) {
+				if (input_graph[i].second[j] == vertex) {
+					input_graph[i].second.erase(input_graph[i].second.begin() + j); // remove vertex from input_graph[i].second
+					break; // move on from this list
+				}
+				j++;
+			}
+		}
+		i++;
+	}
+
+}
+#pragma endregion subgraph_remove_vertex
+
+
+
+#pragma region
 void subgraph_add_edge(subgraph& input_graph, int e1, int e2) {
 
 	/*this function only adds a unique edge, and may add e1 and e2 into input_graph if they are new vertices*/
