@@ -1,6 +1,6 @@
 #pragma once
 
-/*this is an adjacency vector; it is less efficient than a list for Insertion and Deletion*/
+/*this is an adjacency list; it is more efficient than a vector for Insertion and Deletion*/
 
 
 
