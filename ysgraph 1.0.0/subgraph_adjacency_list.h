@@ -154,12 +154,98 @@ void subgraph_add_unique_edge(subgraph& input_graph, int e1, int e2) {
 
 
 
-
-
-#pragma region
 subgraph subgraph_copy_subgraph(subgraph& input_subgraph) {
 
 	return input_subgraph;
 
 }
-#pragma endregion subgraph_copy_subgraph
+
+
+
+std::list<int> subgraph_adjacent_vertices(subgraph& input_graph, int vertex) {
+
+	/*this function returns the adjacent vertices of the input vertex*/
+
+	for (subgraph::iterator it = input_graph.begin(); it != input_graph.end(); it++) {
+
+		if ((*it).first == vertex) {
+			return (*it).second;
+		}
+
+	}
+}
+
+
+
+int subgraph_degree(subgraph& input_graph, int vertex) {
+
+	return subgraph_adjacent_vertices(input_graph, vertex).size();
+
+}
+
+
+
+int subgraph_num_edges(subgraph& input_graph) {
+
+	int num = 0;
+
+	for (std::list<std::pair<int, std::list<int>>>::iterator it = input_graph.begin(); it != input_graph.end(); it++) {
+		num = num + (*it).second.size();
+	}
+
+	return num / 2;
+
+}
+
+
+
+
+int subgraph_vertex_list_ID(subgraph& input_graph, int vertex) {
+
+	/*this function returns the ID of the list that corresponds to the vertex*/
+	int i = 0;
+	for (std::list<std::pair<int, std::list<int>>>::iterator it = input_graph.begin(); it != input_graph.end(); it++) {
+		if ((*it).first == vertex) {
+			return i;
+		}
+		i++;
+	}
+
+}
+
+
+
+bool subgraph_contain_vertex(subgraph& input_graph, int vertex) {
+
+	/*this function returns whether the vertex is contained or not*/
+	for (std::list<std::pair<int, std::list<int>>>::iterator it = input_graph.begin(); it != input_graph.end(); it++) {
+		if ((*it).first == vertex) {
+			return true;
+		}
+	}
+
+	return false;
+
+}
+
+
+
+void subgraph_print(subgraph& input_graph) {
+
+	std::cout << "subgraph_print: " << std::endl;
+
+	for (std::list<std::pair<int, std::list<int>>>::iterator it = input_graph.begin(); it != input_graph.end(); it++) {
+
+		std::cout << (*it).first << ": ";
+
+		for (std::list<int>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); it2++) {
+			std::cout << (*it2) << " ";
+		}
+
+		std::cout << '\n';
+
+	}
+
+	std::cout << "END" << '\n';
+
+}
