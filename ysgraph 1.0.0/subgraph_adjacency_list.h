@@ -11,7 +11,8 @@ typedef std::list<std::pair<int, std::list<int>>> subgraph;
 
 void subgraph_add_nonunique_vertex(subgraph& input_graph, int vertex) {
 
-	/*this function only adds a vertex without checking its uniqueness*/
+	/*this function adds a vertex without checking its uniqueness;
+	time complexity O(1)*/
 
 	subgraph_node x;
 	x.first = vertex;
@@ -23,7 +24,8 @@ void subgraph_add_nonunique_vertex(subgraph& input_graph, int vertex) {
 
 void subgraph_add_unique_vertex(subgraph& input_graph, int vertex) {
 
-	/*this function only adds a unique vertex*/
+	/*this function only adds a unique vertex;
+	time complexity O(|V|)*/
 
 	bool unique = true;
 	for (std::list<std::pair<int, std::list<int>>>::iterator it = input_graph.begin(); it != input_graph.end(); it++) {
