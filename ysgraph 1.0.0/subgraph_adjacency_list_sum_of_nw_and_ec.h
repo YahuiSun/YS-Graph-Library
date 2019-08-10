@@ -5,12 +5,12 @@
 #include <subgraph_adjacency_list.h>
 
 
-double subgraph_sum_of_nw_and_ec(graph& input_graph, subgraph& input_subgraph) {
+double subgraph_adjacency_list_sum_of_nw_and_ec(graph& input_graph, subgraph_adjacency_list& input_subgraph_adjacency_list) {
 
-	int N_subgraph = input_subgraph.size();
+	int N_subgraph_adjacency_list = input_subgraph_adjacency_list.size();
 	double sum_of_nw_and_ec = 0;
 
-	for (std::list<std::pair<int, std::list<int>>>::iterator it = input_subgraph.begin(); it != input_subgraph.end(); it++) {
+	for (std::list<std::pair<int, std::list<int>>>::iterator it = input_subgraph_adjacency_list.begin(); it != input_subgraph_adjacency_list.end(); it++) {
 		int v = (*it).first;
 		sum_of_nw_and_ec = sum_of_nw_and_ec + get(boost::vertex_name_t(), input_graph, v); // plus nw
 		for (std::list<int>::iterator it2 = (*it).second.begin(); it2 != (*it).second.end(); it2++) {
