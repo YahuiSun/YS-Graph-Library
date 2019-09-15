@@ -8,7 +8,7 @@ std::vector<std::pair<int, int>> boost_graph_depth_first_search_a_tree_of_edges(
 	/*we assume that input_graph is connected,
 	otherwise the components that are disconnected with the root will not be traversed*/
 
-	std::vector<pair<int, int>> discovered_edges;
+	std::vector<std::pair<int, int>> discovered_edges;
 
 	typedef boost::graph_traits<graph>::adjacency_iterator AdjacencyIterator;
 	AdjacencyIterator ai, a_end;
