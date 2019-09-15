@@ -96,6 +96,39 @@ void subgraph_add_edge(subgraph& input_graph, int e1, int e2) {
 }
 
 
+void subgraph_remove_edge_and_isolated_vertices(subgraph& input_graph, int e1, int e2) {
+
+	/*this function removes an edge, and may remove e1 and e2 if they are isolated;
+	time complexity O(1)*/
+
+	auto search = input_graph.find(e1);
+	search->second.erase(e2);
+	auto search2 = input_graph.find(e2);
+	search2->second.erase(e1);
+
+	if (search->second.size() == 0) {
+		input_graph.erase(e1);
+	}
+	if (search2->second.size() == 0) {
+		input_graph.erase(e2);
+	}
+
+}
+
+void subgraph_remove_edge_but_not_isolated_vertices(subgraph& input_graph, int e1, int e2) {
+
+	/*this function removes an edge, but not remove e1 and e2 if they are isolated;
+	time complexity O(1)*/
+
+	auto search = input_graph.find(e1);
+	search->second.erase(e2);
+	auto search2 = input_graph.find(e2);
+	search2->second.erase(e1);
+
+}
+
+
+
 
 subgraph subgraph_copy_subgraph(subgraph& input_subgraph) {
 
@@ -103,35 +136,6 @@ subgraph subgraph_copy_subgraph(subgraph& input_subgraph) {
 
 }
 
-
-
-
-std::list<int> subgraph_adjacent_vertices(subgraph& input_graph, int vertex) {
-
-	/*this function returns the adjacent vertices of the input vertex;
-	time complexity O(|V|)*/
-
-	std::list<int> adj_list;
-
-	auto search = input_graph.find(vertex);
-	for (auto it = search->second.begin(); it != search->second.end(); ++it) {
-		adj_list.push_back(*it);
-	}
-
-	return adj_list;
-
-}
-
-
-
-int subgraph_degree(subgraph& input_graph, int vertex) {
-
-	/*time complexity O(1)*/
-
-	auto search = input_graph.find(vertex);
-	return search->second.size();
-
-}
 
 
 int subgraph_num_vertices(subgraph& input_graph) {
@@ -179,9 +183,52 @@ void subgraph_print(subgraph& input_graph) {
 
 	}
 
-	std::cout << "END" << '\n';
+	std::cout << "subgraph_print END" << '\n';
 
 }
+
+
+
+
+std::list<int> subgraph_adjacent_vertices(subgraph& input_graph, int vertex) {
+
+	/*this function returns the adjacent vertices of the input vertex;
+	time complexity O(|V|)*/
+
+	std::list<int> adj_list;
+
+	auto search = input_graph.find(vertex);
+	//std::cout << "vertex: " << vertex << std::endl;
+	//std::cout << "search->second.size(): " << search->second.size() << std::endl;
+	//subgraph_print(input_graph);
+	if (search->second.size() > 0) {
+		for (auto it = search->second.begin(); it != search->second.end(); ++it) {
+			adj_list.push_back(*it);
+		}
+	}
+	
+
+	return adj_list;
+
+}
+
+
+
+int subgraph_degree(subgraph& input_graph, int vertex) {
+
+	/*time complexity O(1)*/
+
+	auto search = input_graph.find(vertex);
+	return search->second.size();
+
+}
+
+
+
+
+
+
+
 
 
 
